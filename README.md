@@ -8,7 +8,7 @@
 
 ## Provided R-script
 #### ./script/bincount-csv_to_pol-usage-wig.R
-\- Generating polymerase usage data in the wig format from genome-wide bin count data, which is produced by Perl script: pe-sam-to-bincount.pl (available at the GitHub site: https://github.com/yasukasu/sam-to-bincount).
+\- Generating polymerase usage data in the wig format from genome-wide bin count data, which is produced by Perl script: pe-sam-to-bincount.pl (available at the GitHub site: https://github.com/yasukasu/sam-to-bincount).  
 \- In the default setting, files in ./data/count.csv will be inputted and outputted files will appear in the working directory.  
 
 
