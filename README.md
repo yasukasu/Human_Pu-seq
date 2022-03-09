@@ -2,7 +2,7 @@
 
 # Initial setting
 \- Rcpp package has to be installed in advance to R environment.  
-\- The R working directory have to be set to the directory which contain 'README.md'(./).
+\- The R working directory have to be set to the directory which contain 'README.md'(./).  
 \- './sub' and './rcpp' contains R and rcpp source codes which are required to be implemented with script above. For this reason, the directory structure within 'script' has to be maintained.  
 \- wigToBigWig have to be executable (located in $PATH)   
 
