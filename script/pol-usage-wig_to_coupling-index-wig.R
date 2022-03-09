@@ -1,5 +1,3 @@
-#setwd("~/R")
-#source("./script/sub/YD.library.v2.R")
 source("./script/sub/sub.import.Wig.into.list.v2.R")
 source("./script/sub/sub.output.WigFile.Vstep.v4.R")
 source("./script/sub/sub.Z.normalising.R")
@@ -9,7 +7,6 @@ source("./script/sub/sub.Z.normalising.R")
 
 
 library("Rcpp")
-#sourceCpp("./script/rcpp/bincount.cpp")
 sourceCpp("./script/rcpp/moving_ave.cpp")
 
 ### parmeter
@@ -17,8 +14,6 @@ sourceCpp("./script/rcpp/moving_ave.cpp")
 bin.size = 1000
 
 prefix ="Pol-e-a"
-
-version ="rep1"
 
 z.norm = "no"
 
@@ -32,25 +27,23 @@ chro.sizes = read.table(file.g.size, row.names =1, col.names=c("chro","size"))
 ###  outputting location
 
 location.main    = "./"
-location.wig.out = file.path(location.main, "wig")
+location.wig.out = "./"
 
 
 if(!dir.exists(location.wig.out))dir.create(location.wig.out)
 
 ### inpputted wig files
 
-path.lead.f = "./data/pol-e-usage.watson.w1000.MA30.rep1.wig"
-path.lead.r = "./data/pol-e-usage.crick.w1000.MA30.rep1.wig" 
-path.lagg.f = "./data/pol-a-usage.watson.w1000.MA30.rep1.wig"
-path.lagg.r = "./data/pol-a-usage.crick.w1000.MA30.rep1.wig"  
+path.lead.f = "./data/wig/pol-e-m630f_pol-usage_watson_w1000_MA30.bw"
+path.lead.r = "./data/wig/pol-e-m630f_pol-usage_crick_w1000_MA30.bw" 
+path.lagg.f = "./data/wig/pol-a-y865f_pol-usage_watson_w1000_MA30.bw"
+path.lagg.r = "./data/wig/pol-a-y865f_pol-usage_crick_w1000_MA30.bw"  
 
 fnames=basename(c(path.lead.f, path.lead.r, path.lagg.f, path.lagg.r))
 f.str = strsplit(fnames, "-|_|\\.")
 ori.MA = gsub("MA", "", sapply(f.str, function(x)x[grep("MA", x)]))
-ori.BT = gsub("BT", "", sapply(f.str, function(x)x[grep("BT", x)]))
 
 if(length(unique(ori.MA))!=1){stop("MA values of inputed wig files are not identical.")}
-if(length(unique(ori.BT))!=1){stop("BT values of inputed wig files are not identical.")}
 
 ###  inputing wig data into list 
 
@@ -214,28 +207,28 @@ if(z.norm=="yes" || z.norm=="y"){
   
   cat("done.\n") 
   
-  path.f.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-f_norm_z.w", bin.size, ".MA", ori.MA[1], ".BT", ori.BT[1], ".", version, ".wig", sep="")
-  path.r.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-r_norm_z.w", bin.size, ".MA", ori.MA[1], ".BT", ori.BT[1], ".", version, ".wig", sep="")
+  path.f.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-f_norm_z.w", bin.size, ".MA", ori.MA[1], ".wig", sep="")
+  path.r.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-r_norm_z.w", bin.size, ".MA", ori.MA[1], ".wig", sep="")
   
-  path.f.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-f_norm_z.w", bin.size, ".MA" ,ori.MA[1], ".BT", ori.BT[1], ".", version, ".bw", sep="")
-  path.r.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-r_norm_z.w", bin.size, ".MA" ,ori.MA[1], ".BT", ori.BT[1], ".", version, ".bw", sep="")
+  path.f.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-f_norm_z.w", bin.size, ".MA" ,ori.MA[1], ".bw", sep="")
+  path.r.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-r_norm_z.w", bin.size, ".MA" ,ori.MA[1], ".bw", sep="")
   
 } else {
   
   pol.cpl.index.f.out.list = pol.cpl.index.f.nm.list
   pol.cpl.index.r.out.list = pol.cpl.index.r.nm.list 
   
-  path.f.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-f.w", bin.size, ".MA", ori.MA[1], ".BT", ori.BT[1], ".", version, ".wig", sep="")
-  path.r.wig =  paste(location.wig.out, "/", prefix, ".coupling-index-r.w", bin.size, ".MA", ori.MA[1], ".BT", ori.BT[1], ".", version, ".wig", sep="")
+  path.f.wig =  paste(location.wig.out, "/", prefix, ".coupling-index.rightward.w", bin.size, ".MA", ori.MA[1], ".wig", sep="")
+  path.r.wig =  paste(location.wig.out, "/", prefix, ".coupling-index.leftward.w", bin.size, ".MA", ori.MA[1], ".wig", sep="")
   
-  path.f.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-f.w", bin.size, ".MA" ,ori.MA[1], ".BT", ori.BT[1], ".", version, ".bw", sep="")
-  path.r.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index-r.w", bin.size, ".MA" ,ori.MA[1], ".BT", ori.BT[1], ".", version, ".bw", sep="")
+  path.f.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index.rightward.w", bin.size, ".MA" ,ori.MA[1], ".bw", sep="")
+  path.r.bw  =  paste(location.wig.out, "/", prefix, ".coupling-index.leftward.w", bin.size, ".MA" ,ori.MA[1], ".bw", sep="")
   
   
 }
 
-name.f = paste(prefix, "_coupling-index-f_w", bin.size, "_MA", ori.MA[1], "-", ori.MA, sep="")
-name.r = paste(prefix, "_coupling-index-r_w", bin.size, "_MA", ori.MA[1], "-", ori.MA, sep="")
+name.f = paste(prefix, "_coupling-index-f_w", bin.size, "_MA", ori.MA[1], sep="")
+name.r = paste(prefix, "_coupling-index-r_w", bin.size, "_MA", ori.MA[1], sep="")
 
 
 

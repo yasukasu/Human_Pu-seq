@@ -1,20 +1,15 @@
 
 ## v3 - eliminating bins without aligned reads in both strands
 
-#setwd("/home/yasukazu/R")
-#library("seqinr")
-source("./script/sub/YD.library.v2.R")
 source("./script/sub/sub.output.WigFile.Vstep.v3.R")
-
 library("Rcpp")
-#sourceCpp("./script/rcpp/bincount.cpp")
 sourceCpp("./script/rcpp/moving_ave.cpp")
 
 rNTP.ratio.wig.files <-function(Strain, Control, file.g.size, location.in, location.out, chro_list, w.size, MA, bin.count.T){
 
   cat("\nprocessing data of", Strain, "...\n")
 
-  ## data from the tatal genme ##
+  ## data from the tatal genome ##
 
   chro.sizes = read.table(file.g.size, row.names =1)[chro_list,1]
   genome.size = sum(as.numeric(chro.sizes))
@@ -23,14 +18,14 @@ rNTP.ratio.wig.files <-function(Strain, Control, file.g.size, location.in, locat
 
   cat("Genome Size:", genome.size/10^6, "Mb (",genome.size, "bp)\n")
 
-  ## rading data from files ##
+  ## reading data from files ##
 
   fnames = list.files(location.in)
 
-  st.fv.f = grep(paste0(Strain,"\\.f-w", w.size, "\\.count.csv$"), fnames)
-  st.fv.r = grep(paste0(Strain,"\\.r-w", w.size, "\\.count.csv$"), fnames)
-  ct.fv.f = grep(paste0(Control,"\\.f-w", w.size, "\\.count.csv$"), fnames)
-  ct.fv.r = grep(paste0(Control,"\\.r-w", w.size, "\\.count.csv$"), fnames)
+  st.fv.f = grep(paste0(Strain,".*\\.f-w", w.size, "\\.count.csv$"), fnames)
+  st.fv.r = grep(paste0(Strain,".*\\.r-w", w.size, "\\.count.csv$"), fnames)
+  ct.fv.f = grep(paste0(Control,".*\\.f-w", w.size, "\\.count.csv$"), fnames)
+  ct.fv.r = grep(paste0(Control,".*\\.r-w", w.size, "\\.count.csv$"), fnames)
 
   if(length(st.fv.f)==0 || length(st.fv.r)==0){
     stop("The sample file was not detected in ", location.in)
@@ -112,13 +107,6 @@ rNTP.ratio.wig.files <-function(Strain, Control, file.g.size, location.in, locat
 
     ### caluculation
 
-    #ctl.f.min <- min(ave.bin.ctl.f, 1)
-    #ctl.r.min <- min(ave.bin.ctl.r, 1)
-
-    #ctl.f.count.m <- replace(ctl.f.count, which(ctl.f.count==0), ctl.f.min) ## substitute 0 with 1 or average bin count
-    #ctl.r.count.m <- replace(ctl.r.count, which(ctl.r.count==0), ctl.r.min)
-
-
     mut.f.ech <- mut.f.count/ave.bin.mut.f
     mut.r.ech <- mut.r.count/ave.bin.mut.r
     ctl.f.ech <- ctl.f.count/ave.bin.ctl.f
@@ -155,11 +143,11 @@ rNTP.ratio.wig.files <-function(Strain, Control, file.g.size, location.in, locat
 
 
 
-  path.wig.f = paste(location.out, "/", Strain, "_ratio-to-ctl-v3_watson_w", bin.size, "_MA", MA, "_BT", bin.count.T, ".wig", sep="")
-  path.wig.r = paste(location.out, "/", Strain, "_ratio-to-ctl-v3_crick_w",  bin.size, "_MA", MA, "_BT", bin.count.T, ".wig", sep="")
+  path.wig.f = paste(location.out, "/", Strain, "_pol-usage_watson_w", bin.size, "_MA", MA, ".wig", sep="")
+  path.wig.r = paste(location.out, "/", Strain, "_pol-usage_crick_w",  bin.size, "_MA", MA, ".wig", sep="")
 
-  path.bw.f = paste(location.out, "/", Strain, "_ratio-to-ctl-v3_watson_w", bin.size, "_MA", MA, "_BT", bin.count.T, ".bw", sep="")
-  path.bw.r = paste(location.out, "/", Strain, "_ratio-to-ctl-v3_crick_w",  bin.size, "_MA", MA, "_BT", bin.count.T, ".bw", sep="")
+  path.bw.f = paste(location.out, "/", Strain, "_pol-usage_watson_w", bin.size, "_MA", MA, ".bw", sep="")
+  path.bw.r = paste(location.out, "/", Strain, "_pol-usage_crick_w",  bin.size, "_MA", MA, ".bw", sep="")
 
   name.f =    paste(Strain, "_watson-str_w", bin.size, "_MA", MA, sep="")
   name.r =    paste(Strain, "_crick-str_w",  bin.size, "_MA", MA, sep="")
@@ -179,37 +167,29 @@ rNTP.ratio.wig.files <-function(Strain, Control, file.g.size, location.in, locat
 }
 
 
-## refrence genome: fasta
-# cat("Extracting fasta data ...\n")
-# file.genome = "./data/genome/GRCh38/GRCh38.fasta"
-file.g.size = "./data/genome/GRCh38/GRCh38.chrom.sizes"
+## genome
 
-## genome.chr.list = read.fasta(file = file.genome)
-## names.chro = names(genome.chr.list)
-## genome.size = length(unlist(genome.chr.list))
+file.g.size = "./data/genome/GRCh38.chrom.sizes"
 
 names.chro = c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8",
                "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16",
                "chr17", "chr18", "chr19", "chr20", "chr21", "chr22", "chrX", "chrY", "chrM")
-#genome.size = 3095693983  ## wrong?? 15/1/2019
+
 w.size = 1000
 MA     =　30
 bin.count.T = 5  # minmum reads to output bin data
 
-
 cat("Chromosomes:", names.chro, "\n")
 cat("Window Size:", w.size, "bp\n")
 
-location.main = "./data/200801-hct116-pu-seq-pola1-h2"
+location.main = "./data"
 location.in   = file.path(location.main, "count.csv")
-location.wig  = file.path(location.main, "wig")
-location.out  = file.path(location.wig,  "ratio-to-ctr.v3")
+location.out  =  "./"
 
 if(!dir.exists(location.in))stop("The directory of input files does not exist.:", location.in)
 
-if(!dir.exists(location.wig))dir.create(location.wig)
 if(!dir.exists(location.out))dir.create(location.out)
 
 
-rNTP.ratio.wig.files("pol-e-m630f" , "pol-a-plus", file.g.size, location.in, location.out, names.chro, w.size, MA, bin.count.T)
+rNTP.ratio.wig.files("pol-a-y865f" , "pol-a-plus", file.g.size, location.in, location.out, names.chro, w.size, MA, bin.count.T)
 rNTP.ratio.wig.files("pol-e-m630f" , "pol-e-plus", file.g.size, location.in, location.out, names.chro, w.size, MA, bin.count.T)

@@ -14,13 +14,11 @@ sourceCpp("./script/rcpp/moving_ave.cpp")
 
 ### parmeter
 
-MA = 30   # the parameter for moving ave (2N+1)
+MA = 15   # the parameter for moving ave (2N+1)
 
 bin.size = 1000
 
 prefix ="Pol-e-a"
-
-version ="rep1"
 
 ### data from the tatal genme
 
@@ -30,22 +28,20 @@ chro.sizes = read.table(file.g.size, row.names =1, col.names=c("chro","size"))
 ###  outputting location
 
 location.main    = "./"
-location.wig.in  = file.path(location.main, "wig")
-location.wig.out = file.path(location.main, "wig")
+location.wig.out = "./"
 
-
-if(!dir.exists(location.wig.in) )stop("The directory of input files does not exist.:", location.in)
 if(!dir.exists(location.wig.out))dir.create(location.wig.out)
 
 ### inpputted wig files
 
-path.lead.f = "./data/pol-e-usage.watson.w1000.MA30.rep1.wig"
-path.lead.r = "./data/pol-e-usage.crick.w1000.MA30.rep1.wig" 
-path.lagg.f = "./data/pol-a-usage.watson.w1000.MA30.rep1.wig"
-path.lagg.r = "./data/pol-a-usage.crick.w1000.MA30.rep1.wig"  
+path.lead.f = "./data/wig/pol-e-m630f_pol-usage_watson_w1000_MA30.bw"
+path.lead.r = "./data/wig/pol-e-m630f_pol-usage_crick_w1000_MA30.bw" 
+path.lagg.f = "./data/wig/pol-a-y865f_pol-usage_watson_w1000_MA30.bw"
+path.lagg.r = "./data/wig/pol-a-y865f_pol-usage_crick_w1000_MA30.bw"  
+
 
 fnames=basename(c(path.lead.f, path.lead.r, path.lagg.f, path.lagg.r))
-f.str = strsplit(fnames, "-|_")
+f.str = strsplit(fnames, "-|_|\\.")
 ori.MA= gsub("MA", "", sapply(f.str, function(x)x[grep("MA", x)]))
 
 if(length(unique(ori.MA))!=1){stop("MA values of inputed wig files are not identical.")}
@@ -134,10 +130,12 @@ for(chromo in names.chro){
   lagg.diff.f.chr = diff(lagg.f.chr)
   lagg.diff.r.chr = diff(lagg.r.chr)  
   
-  lead.diff.f.chr.ma <- rcpp_moving_ave(lead.diff.f.chr, MA)
-  lead.diff.r.chr.ma <- rcpp_moving_ave(lead.diff.r.chr, MA)
-  lagg.diff.f.chr.ma <- rcpp_moving_ave(lagg.diff.f.chr, MA)
-  lagg.diff.r.chr.ma <- rcpp_moving_ave(lagg.diff.r.chr, MA)
+  MA.1 = ifelse(length(pos.lead.chr)>MA, MA, length(pos.lead.chr))
+  
+  lead.diff.f.chr.ma <- rcpp_moving_ave(lead.diff.f.chr, MA.1)
+  lead.diff.r.chr.ma <- rcpp_moving_ave(lead.diff.r.chr, MA.1)
+  lagg.diff.f.chr.ma <- rcpp_moving_ave(lagg.diff.f.chr, MA.1)
+  lagg.diff.r.chr.ma <- rcpp_moving_ave(lagg.diff.r.chr, MA.1)
   
   
   ini.index.chr = apply(cbind(lead.diff.f.chr.ma, lead.diff.r.chr.ma, lagg.diff.f.chr.ma, lagg.diff.r.chr.ma), 1,  calc.ini.index)
@@ -173,9 +171,9 @@ cat("done.\n")
 
 
 
-path.wig.s =  paste(location.wig.out, "/", prefix, ".ini-index_norm_z.w", bin.size, ".MA", ori.MA[1], "-", MA,".", version, ".wig", sep="")
+path.wig.s =  paste(location.wig.out, "/","ini-index.",  prefix, ".w", bin.size, ".MA", ori.MA[1], "-", MA,".wig", sep="")
 
-path.bw.s  =  paste(location.wig.out, "/", prefix, ".ini-index_norm_z.w", bin.size, ".MA" ,ori.MA[1], "-", MA, ".", version, ".bw", sep="")
+path.bw.s  =  paste(location.wig.out, "/","ini-index.",  prefix, ".w", bin.size, ".MA", ori.MA[1], "-", MA, ".bw", sep="")
 
 
 

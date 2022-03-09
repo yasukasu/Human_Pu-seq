@@ -1,9 +1,7 @@
 
 ## v3 - eliminating bins without aligned reads in both strands
 
-setwd("/home/yasukazu/R")
 #library("seqinr")
-source("./script/sub/YD.library.v2.R")
 source("./script/sub/sub.Z.normalising.R")
 source("./script/sub/sub.output.WigFile.Vstep.v4.R")
 
@@ -199,19 +197,17 @@ RFD.wig.files.v2 <-function(path.Ld.f,  path.Ld.r, path.Lg.f, path.Lg.r, prefixs
 }
 
 
-## refrence genome: fasta
-# cat("Extracting fasta data ...\n")
-# file.genome = "./data/genome/GRCh38/GRCh38.fasta"
-file.g.size = "./data/genome/GRCh38/GRCh38.chrom.sizes"
+## genome:
 
-## genome.chr.list = read.fasta(file = file.genome)
-## names.chro = names(genome.chr.list)
-## genome.size = length(unlist(genome.chr.list))
+file.g.size = "./data/genome/GRCh38.chrom.sizes"
+
+
 
 names.chro = c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8",
                "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16",
                "chr17", "chr18", "chr19", "chr20", "chr21", "chr22", "chrX", "chrY", "chrM")
-#genome.size = 3095693983  ## wrong?? 15/1/2019
+
+
 w.size = 1000
 MA     =　30
 bin.count.T = 5  # minmum reads to output bin data
@@ -221,23 +217,16 @@ cat("Chromosomes:", names.chro, "\n")
 cat("Window Size:", w.size, "bp\n")
 
 location.main = "./"
+location.out  = "./"
 
-location.wig  = file.path(location.main, "wig")
-location.out  = file.path(location.wig,  "")
 
-if(!dir.exists(location.wig))dir.create(location.wig)
 if(!dir.exists(location.out))dir.create(location.out)
 
-path.Ld.f = "./data/pol-e-usage.watson.w1000.MA30.rep1.wig"
-path.Ld.r = "./data/pol-e-usage.crick.w1000.MA30.rep1.wig" 
-path.Lg.f = "./data/pol-a-usage.watson.w1000.MA30.rep1.wig"
-path.Lg.r = "./data/pol-a-usage.crick.w1000.MA30.rep1.wig"  
+path.Ld.f = "./data/count.csv/pol-e-m630f.f-w1000.count.csv"
+path.Ld.r = "./data/count.csv/pol-e-m630f.r-w1000.count.csv" 
+path.Lg.f = "./data/count.csv/pol-a-y865f.f-w1000.count.csv"
+path.Lg.r = "./data/count.csv/pol-a-y865f.r-w1000.count.csv"  
 
-
-path.lead.f = "./data/pol-e-usage.watson.w1000.MA30.rep1.wig"
-path.lead.r = "./data/pol-e-usage.crick.w1000.MA30.rep1.wig" 
-path.lagg.f = "./data/pol-a-usage.watson.w1000.MA30.rep1.wig"
-path.lagg.r = "./data/pol-a-usage.crick.w1000.MA30.rep1.wig"  
 
 prefixs = c("hct116-2-pol", "hct116-pol-e", "hct116-pol-a")
 
