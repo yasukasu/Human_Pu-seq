@@ -21,8 +21,13 @@
 \- Generating coupling index data in the wig format from genome-wide bin count data.  
 \- Inputting files (.count.csv) are required to be written in the cod  
 
+#### Guidance
+Rcpp package has to be installed in advance to R environment.
 './sub' and './rcpp' contains R and rcpp source codes which are required to be implemented with script above.  
-Inputting files are required to be written in the codes.  
+For this reason, the directory structure within 'script' has to be maintained.
+
+
+
 
 ## Provided wig format datasets
 #### Genome-wide bin counts datasets
