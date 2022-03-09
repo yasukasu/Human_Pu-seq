@@ -25,7 +25,7 @@
 Inputting files are required to be written in the codes.  
 
 ## Provided wig format datasets
-####Genome-wide bin counts datasets
+#### Genome-wide bin counts datasets
 ./data/count.csv/pol-e-m630f.f-w1000.count.csv  
 ./data/count.csv/pol-e-m630f.r-w1000.count.csv  
 ./data/count.csv/pol-e-plus.f-w1000.count.csv  
@@ -52,5 +52,5 @@ Inputting files are required to be written in the codes.
 ./data/wig/couplig-index.leftward.w1000.MA30.rep1.wig  
 ./data/wig/couplig-index.rightward.w1000.MA30.rep1.wig  
 
-#### Replication fork directionality (RFD) 
+#### Replication fork directionality (RFD)
 ./data/wig/RFD.pol-e-a.w1000.MA30.wig  
