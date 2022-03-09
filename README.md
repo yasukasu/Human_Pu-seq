@@ -1,10 +1,10 @@
 # Human polymerase usage sequencing (Pu-seq) R-scripts & demo data  v1.0
 
 # Initial setting
-Rcpp package has to be installed in advance to R environment.  
-The R working directory have to be set to the directory which contain 'README.md'(./).
-'./sub' and './rcpp' contains R and rcpp source codes which are required to be implemented with script above. For this reason, the directory structure within 'script' has to be maintained.
-
+\- Rcpp package has to be installed in advance to R environment.  
+\- The R working directory have to be set to the directory which contain 'README.md'(./).
+\- './sub' and './rcpp' contains R and rcpp source codes which are required to be implemented with script above. For this reason, the directory structure within 'script' has to be maintained.  
+\- wigToBigWig have to be executable (located in $PATH)   
 
 ## Provided R-script
 #### ./script/bincount-csv_to_pol-usage-wig.R
@@ -28,11 +28,6 @@ The R working directory have to be set to the directory which contain 'README.md
 \- Generating coupling index data in the wig format from genome-wide bin count data.  
 \- In the default setting, files in ./data/count.csv will be inputted and outputted files will appear in the working directory.   
 
-#### Guidance
-Rcpp package has to be installed in advance to R environment.  
-The R working directory have to be set to the directory which contain 'README.md'(./).
-'./sub' and './rcpp' contains R and rcpp source codes which are required to be implemented with script above. For this reason, the directory structure within 'script' has to be maintained.
-Outputted files will appear in the working directory.
 
 
 
@@ -49,21 +44,21 @@ Outputted files will appear in the working directory.
 ./data/count.csv/pol-a-plus.r-w1000.count.csv    
 
 #### Polymerase usage data
-./data/wig/pol-a-usage.crick.w1000.MA30.rep1.wig  
-./data/wig/pol-a-usage.watson.w1000.MA30.rep1.wig  
-./data/wig/pol-e-usage.crick.w1000.MA30.rep1.wig  
-./data/wig/pol-e-usage.watson.w1000.MA30.rep1.wig  
+./data/wig/pol-e-m630f_pol-usage_watson_w1000_MA30.bw  
+./data/wig/pol-e-m630f_pol-usage_crick_w1000_MA30.bw  
+./data/wig/pol-a-y865f_pol-usage_watson_w1000_MA30.bw  
+./data/wig/pol-a-y865f_pol-usage_crick_w1000_MA30.bw  
 
 #### Initiation index
 ./data/wig/ini-index.pol-e-a.w1000.MA30-15.rep1.wig  
 
 #### Fork index
-./data/wig/fork-index.leftward.w1000.MA30-15.rep1.wig  
-./data/wig/fork-index.rightward.w1000.MA30-15.rep1.wig  
+./data/wig/Pol-e-a.fork-index.leftward.norm_z.w1000.MA30-15.bw  
+./data/wig/Pol-e-a.fork-index.rightward.norm_z.w1000.MA30-15.bw  
 
 #### Coupling index
-./data/wig/couplig-index.leftward.w1000.MA30.rep1.wig  
-./data/wig/couplig-index.rightward.w1000.MA30.rep1.wig  
+./data/wig/Pol-e-a.coupling-index.rightward.w1000.MA30.bw  
+./data/wig/Pol-e-a.coupling-index.leftward.w1000.MA30.bw  
 
 #### Replication fork directionality (RFD)
 ./data/wig/RFD.pol-e-a.w1000.MA30.wig  
