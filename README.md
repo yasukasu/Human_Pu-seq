@@ -39,14 +39,14 @@ Outputted files will appear in the working directory.
 
 ## Provided wig format datasets
 #### Genome-wide bin counts datasets
-./data/count.csv/pol-e-m630f.f-w1000.count.csv
-./data/count.csv/pol-e-m630f.r-w1000.count.csv
-./data/count.csv/pol-e-plus.f-w1000.count.csv 
-./data/count.csv/pol-e-plus.r-w1000.count.csv
+./data/count.csv/pol-e-m630f.f-w1000.count.csv  
+./data/count.csv/pol-e-m630f.r-w1000.count.csv  
+./data/count.csv/pol-e-plus.f-w1000.count.csv  
+./data/count.csv/pol-e-plus.r-w1000.count.csv  
 ./data/count.csv/pol-a-y865f.rep1.f-w1000.count.csv  
-./data/count.csv/pol-a-y865f.rep1.r-w1000.count.csv
+./data/count.csv/pol-a-y865f.rep1.r-w1000.count.csv  
 ./data/count.csv/pol-a-plus.f-w1000.count.csv  
-./data/count.csv/pol-a-plus.r-w1000.count.csv  
+./data/count.csv/pol-a-plus.r-w1000.count.csv    
 
 #### Polymerase usage data
 ./data/wig/pol-a-usage.crick.w1000.MA30.rep1.wig  
