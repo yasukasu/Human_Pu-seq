@@ -1,0 +1,60 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata below."
+
+title: "Human Pu-seq analysis for DNA polymerase eta"
+
+version: "1.01"
+date-released: 2026-08-31
+
+authors:
+
+* family-names: "Bainbridge"
+  given-names: "Lewis J."
+
+* family-names: "Takahashi"
+  given-names: "Mami"
+
+* family-names: "Minamisawa"
+  given-names: "Tamiko
+
+* family-names: "Daigaku"
+  given-names: "Yasukazu"
+
+keywords:
+
+* "DNA replication"
+* "DNA polymerase eta"
+* "Pol eta"
+* "Pu-seq"
+* "polymerase usage sequencing"
+* "lagging strand"
+* "replication timing"
+* "mutagenesis"
+
+
+preferred-citation:
+type: article
+title: "Strand- and replication timing-dependent functions of DNA polymerase η in human DNA replication"
+authors:
+- family-names: "Bainbridge"
+  given-names: "Lewis J."
+
+- family-names: "Masuda"
+  given-names: "Yuji"
+
+- family-names: "Minamisawa"
+  given-names: "Tamiko"
+
+- family-names: "Takahashi"
+  given-names: "Mami"
+
+- family-names: "Kaneko"
+  given-names: "Kanae"
+
+- family-names: "Masutani"
+  given-names: "Chikahide"
+
+- family-names: "Daigaku"
+  given-names: "Yasukazu"
+```
+
