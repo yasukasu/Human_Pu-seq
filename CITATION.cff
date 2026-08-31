@@ -8,28 +8,28 @@ date-released: 2026-08-31
 
 authors:
 
-* family-names: "Bainbridge"
+- family-names: "Bainbridge"
   given-names: "Lewis J."
 
-* family-names: "Takahashi"
+- family-names: "Takahashi"
   given-names: "Mami"
 
-* family-names: "Minamisawa"
+- family-names: "Minamisawa"
   given-names: "Tamiko
 
-* family-names: "Daigaku"
+- family-names: "Daigaku"
   given-names: "Yasukazu"
 
 keywords:
 
-* "DNA replication"
-* "DNA polymerase eta"
-* "Pol eta"
-* "Pu-seq"
-* "polymerase usage sequencing"
-* "lagging strand"
-* "replication timing"
-* "mutagenesis"
+- "DNA replication"
+- "DNA polymerase eta"
+- "Pol eta"
+- "Pu-seq"
+- "polymerase usage sequencing"
+- "lagging strand"
+- "replication timing"
+- "mutagenesis"
 
 
 preferred-citation:
