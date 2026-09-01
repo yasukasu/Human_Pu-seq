@@ -28,22 +28,22 @@ for (i in seq_along(watson_list)) {
   
   # Establish parameters and check for errors
   
-  pol = sub(".*\\/(.*)\\.a1.*", "\\1", f.file)
-  r.pol = sub(".*\\/(.*)\\.a1.*", "\\1", r.file)
+  pol <- sub("_pol-usage_watson.*$", "", basename(f.file))
+  r.pol <- sub("_pol-usage_crick.*$", "", basename(r.file))
   
   if (pol != r.pol) {
     stop("Error: polymerase must be the same.")
   }
   
-  bin.width = sub(".*_w([0-9]+)_MA.*", "\\1", f.file)
-  r.bin.width = sub(".*_w([0-9]+)_MA.*", "\\1", r.file)
+  bin.width <- sub(".*_w([0-9]+)_MA.*", "\\1", basename(f.file))
+  r.bin.width <- sub(".*_w([0-9]+)_MA.*", "\\1", basename(r.file))
   
   if (bin.width != r.bin.width) {
     stop("Error: bin width must be the same value.")
   }
   
-  MA = sub(".*_MA([0-9]+)_.*", "\\1", f.file)
-  r.MA = sub(".*_MA([0-9]+)_.*", "\\1", r.file)
+  MA <- sub(".*_MA([0-9]+).*", "\\1", basename(f.file))
+  r.MA <- sub(".*_MA([0-9]+).*", "\\1", basename(r.file))
   
   if (MA != r.MA) {
     stop("Error: MA must be the same value.")
@@ -59,12 +59,12 @@ for (i in seq_along(watson_list)) {
   
   track.name <- paste(pol, "_MA", MA, ".str-bias.wig", sep = "")
   current_date <- Sys.Date()
-  track.decription <- paste("Analysis by L. Bainbridge; ", current_date)
+  track.description <- paste("Analysis by L. Bainbridge; ", current_date)
   additional_params <- "visibility=full autoScale=off color=214,43,59 yLineOnOff=on yLineMark=0 viewLimits=-0.5:0.5 priority=10"
-  header <- paste("track type=wiggle_0 name=\"", track.name, "\" description=\"", track.decription, "\"", " ", additional_params, sep="")
+  header <- paste("track type=wiggle_0 name=\"", track.name, "\" description=\"", track.description, "\"", " ", additional_params, sep="")
   
   
-  #Read count files
+  # Import polymerase-usage Wig or bigWig files
   column_names = c("chro", "pos", "score")
   
   f.wig_file <- import(f.file)
